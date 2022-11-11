@@ -92,7 +92,18 @@ def square_update(num_rolls, player_score, opponent_score, dice=six_sided):
 
 
 # BEGIN PROBLEM 4
-"*** YOUR CODE HERE ***"
+def perfect_square(score):
+    d = score ** 0.5
+    if d % 1 == 0:
+        return True
+    return False
+
+def next_perfect_square(score):
+    d = score ** 0.5
+    y = (d + 1)
+    product = y * y
+    return int(product)
+
 # END PROBLEM 4
 
 
@@ -131,8 +142,13 @@ def play(strategy0, strategy1, update,
     """
     who = 0  # Who is about to take a turn, 0 (first) or 1 (second)
     # BEGIN PROBLEM 5
-    "*** YOUR CODE HERE ***"
-    # END PROBLEM 5
+    while goal > score0 and goal > score1:
+        if who == 0:
+            score0 = update(strategy0(score0, score1), score0, score1, dice)
+        else:
+            score1 = update(strategy1(score1, score0), score1, score0, dice)
+        who = 1 - who
+    # END PROBLEM 
     return score0, score1
 
 
@@ -156,7 +172,9 @@ def always_roll(n):
     """
     assert n >= 0 and n <= 10
     # BEGIN PROBLEM 6
-    "*** YOUR CODE HERE ***"
+    def strategy(x, y):
+        return n
+    return strategy
     # END PROBLEM 6
 
 
@@ -185,8 +203,15 @@ def is_always_roll(strategy, goal=GOAL):
     >>> is_always_roll(catch_up)
     False
     """
+
+    expected = strategy(0, 0)
     # BEGIN PROBLEM 7
-    "*** YOUR CODE HERE ***"
+    for i in range(100):
+        for j in range(100):
+            if strategy(i, j) != expected:
+                return False
+    return True
+       
     # END PROBLEM 7
 
 
@@ -202,7 +227,13 @@ def make_averaged(original_function, total_samples=1000):
     3.0
     """
     # BEGIN PROBLEM 8
-    "*** YOUR CODE HERE ***"
+    def averaged_dice(*args):
+        sum = 0
+        for i in range(total_samples): 
+            sum += original_function(*args)
+        return sum / total_samples
+        
+    return averaged_dice
     # END PROBLEM 8
 
 
@@ -216,7 +247,13 @@ def max_scoring_num_rolls(dice=six_sided, total_samples=1000):
     1
     """
     # BEGIN PROBLEM 9
-    "*** YOUR CODE HERE ***"
+    sum = 0
+    for i in range (10):
+        sum += make_test_dice
+        return sum / 
+
+             
+
     # END PROBLEM 9
 
 
